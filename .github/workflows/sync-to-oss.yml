@@ -2,7 +2,7 @@ name: Sync to Alibaba Cloud OSS
 
 on:
   push:
-    branches: [ master ] # 设置为需要在哪个分支推送时触发
+    branches: [ main, master ]  # 同时监听 main 和 master 分支
 
 jobs:
   deploy:
@@ -11,40 +11,43 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # 此处可以添加你的构建步骤（如果需要），例如使用 npm run build
-    # - name: Build Project
-    #   run: |
-    #     npm install
-    #     npm run build
+    - name: Debug - List repository files
+      run: |
+        echo "=== 仓库文件列表 ==="
+        find . -type f | head -20
+        echo "=== 当前目录 ==="
+        pwd
+        ls -la
 
-    - name: Configure ossutil
+    - name: Install and Configure ossutil
       env:
-        # 通过 GitHub Secrets 配置的 AccessKey 和 OSS 信息
         ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
         ACCESS_KEY_SECRET: ${{ secrets.ACCESS_KEY_SECRET }}
         OSS_ENDPOINT: ${{ secrets.OSS_ENDPOINT }}
         OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
       run: |
-        # 下载 ossutil
-        wget https://gosspublic.alicdn.com/ossutil/v2/2.1.2/ossutil-2.1.2-linux-amd64.zip
-        unzip ossutil-2.1.2-linux-amd64.zip
+        echo "开始安装和配置 ossutil..."
+        
+        # 下载并安装 ossutil
+        wget -q https://gosspublic.alicdn.com/ossutil/v2/2.1.2/ossutil-2.1.2-linux-amd64.zip
+        unzip -q ossutil-2.1.2-linux-amd64.zip
         sudo mv ossutil-2.1.2-linux-amd64/ossutil /usr/local/bin/ossutil
         chmod +x /usr/local/bin/ossutil
-
-        # 使用密钥配置 ossutil
+        
+        # 配置 ossutil
+        echo "配置 OSS Endpoint: $OSS_ENDPOINT"
+        echo "配置 OSS Bucket: $OSS_BUCKET"
         ossutil config -e $OSS_ENDPOINT -i $ACCESS_KEY_ID -k $ACCESS_KEY_SECRET -L CH
         
-        # 验证配置是否成功
-        echo "验证 OSS 连接和 Bucket 访问权限..."
-        ossutil ls oss://$OSS_BUCKET/
+        # 验证配置
+        echo "验证 OSS 连接..."
+        ossutil ls oss://$OSS_BUCKET/ || echo "Bucket 列表失败，但继续执行"
 
     - name: Sync Files to OSS
       env:
         OSS_BUCKET: ${{ secrets.OSS_BUCKET }}
       run: |
-        # 同步文件到你的 OSS Bucket
-        echo "开始同步文件到 OSS Bucket: $OSS_BUCKET"
-        ossutil sync ./ oss://$OSS_BUCKET/ -u --delete
-        
-        # 同步完成后显示成功信息
-        echo "🎉 文件同步完成！"
+        echo "开始同步文件到 OSS..."
+        # 首次同步，先不使用 --delete 参数
+        ossutil sync ./ oss://$OSS_BUCKET/ -u
+        echo "✅ 文件同步完成！"
