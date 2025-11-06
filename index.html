@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邪恶大马斯特刘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e6e6e6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b, #ff0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.6);
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+        
+        .loading-container {
+            margin: 2rem 0;
+        }
+        
+        .loading-bar {
+            width: 300px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff0000, #ff6b6b);
+            border-radius: 5px;
+            transition: width 5s linear;
+        }
+        
+        .countdown {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        .redirect-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #ff0000, #ff6b6b);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .redirect-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .small-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(45deg, #4a00e0, #8e2de2);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(142, 45, 226, 0.3);
+        }
+        
+        .small-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(142, 45, 226, 0.5);
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 2rem;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            to {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+        
+        .footer {
+            margin-top: 3rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <div class="container">
+        <h1>邪恶大马斯特刘</h1>
+        <p class="subtitle">正在进入神秘领域...</p>
+        
+        <div class="loading-container">
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
+            <div class="countdown" id="countdown">5秒后自动跳转</div>
+        </div>
+        
+        <div class="button-container">
+            <a href="HML9/index.html" class="redirect-link" id="manualLink">直接冲!</a>
+            <a href="双生魔丸.html" class="small-button">双生魔丸</a>
+        </div>
+        
+        <div class="footer">
+            <p>如果页面没有自动跳转，请点击上方链接</p>
+        </div>
+    </div>
+
+    <script>
+        // 创建浮动元素
+        const floatingElements = document.getElementById('floatingElements');
+        const symbols = ['♠', '♣', '♥', '♦', '★', '☠', '⚡', '♞'];
+        
+        for (let i = 0; i < 15; i++) {
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.animationDuration = (15 + Math.random() * 20) + 's';
+            element.style.animationDelay = Math.random() * 5 + 's';
+            element.style.fontSize = (1 + Math.random() * 2) + 'rem';
+            floatingElements.appendChild(element);
+        }
+        
+        // 自动跳转功能
+        const countdownElement = document.getElementById('countdown');
+        const loadingProgress = document.getElementById('loadingProgress');
+        
+        // 启动进度条动画
+        setTimeout(() => {
+            loadingProgress.style.width = '100%';
+        }, 100);
+        
+        // 更新倒计时
+        let countdown = 5;
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = `${countdown}秒后自动跳转`;
+            
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = 'HML9/index.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
