@@ -1,2 +1,2 @@
 # hsgg-game
-`7126qwe
+## 使用 '.bat' 调用 '.git/hooks/post-push'

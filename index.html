@@ -3,223 +3,438 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>邪恶大马斯特刘</title>
+    <title>邪恶大马斯特的百宝库</title>
     <style>
+        :root {
+            --primary-color: #8b0000;
+            --secondary-color: #4a0000;
+            --accent-color: #ff4500;
+            --background-dark: #1a1a1a;
+            --background-light: #2d2d2d;
+            --text-color: #f0f0f0;
+            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Microsoft YaHei', sans-serif;
         }
-        
+
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #e6e6e6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 69, 0, 0.1) 0%, transparent 20%);
         }
-        
-        .container {
-            text-align: center;
+
+        header {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
             padding: 2rem;
-            max-width: 800px;
-            z-index: 10;
-        }
-        
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-            letter-spacing: 2px;
-            background: linear-gradient(45deg, #ff0000, #ff6b6b, #ff0000);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
-            }
-            to {
-                text-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.6);
-            }
-        }
-        
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: #cccccc;
-        }
-        
-        .loading-container {
-            margin: 2rem 0;
-        }
-        
-        .loading-bar {
-            width: 300px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 5px;
-            margin: 0 auto;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            position: relative;
             overflow: hidden;
+            border-bottom: 3px solid var(--accent-color);
         }
-        
-        .loading-progress {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #ff0000, #ff6b6b);
-            border-radius: 5px;
-            transition: width 5s linear;
-        }
-        
-        .countdown {
-            font-size: 1.2rem;
-            margin-top: 1rem;
-        }
-        
-        .redirect-link {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: linear-gradient(45deg, #ff0000, #ff6b6b);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-        }
-        
-        .redirect-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
-        }
-        
-        .small-button {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: linear-gradient(45deg, #4a00e0, #8e2de2);
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(142, 45, 226, 0.3);
-        }
-        
-        .small-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(142, 45, 226, 0.5);
-        }
-        
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-        
-        .floating-elements {
+
+        header::before {
+            content: "";
             position: absolute;
-            width: 100%;
-            height: 100%;
             top: 0;
             left: 0;
-            pointer-events: none;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(0,0,0,0.2)"/></svg>');
+            background-size: cover;
         }
-        
-        .floating-element {
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 0.5rem;
+            position: relative;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            opacity: 0.8;
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background-color: rgba(45, 45, 45, 0.7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .search-box {
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--primary-color);
+            background-color: var(--background-light);
+            color: var(--text-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--background-light);
+            border: 1px solid var(--primary-color);
+            color: var(--text-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .game-card {
+            background-color: var(--background-light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            border-color: var(--accent-color);
+        }
+
+        .game-image {
+            height: 180px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-image::after {
+            content: "";
             position: absolute;
-            opacity: 0.1;
-            font-size: 2rem;
-            animation: float 15s infinite linear;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
         }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            to {
-                transform: translateY(-100px) rotate(360deg);
-            }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        
-        .footer {
-            margin-top: 3rem;
-            color: #888;
+
+        .game-card:hover .game-image img {
+            transform: scale(1.05);
+        }
+
+        .game-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-description {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            opacity: 0.8;
             font-size: 0.9rem;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            display: block;
+            text-align: center;
+            padding: 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .play-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--primary-color);
+            opacity: 0.7;
+            background-color: var(--background-light);
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            font-style: italic;
+            opacity: 0.7;
+            background-color: var(--background-light);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="floating-elements" id="floatingElements"></div>
-    
+    <header>
+        <h1>邪恶大马斯特的百宝库</h1>
+        <p class="subtitle">踏入此地者，将直面无尽游戏的诱惑</p>
+    </header>
+
     <div class="container">
-        <h1>邪恶大马斯特刘</h1>
-        <p class="subtitle">正在进入神秘领域...</p>
-        
-        <div class="loading-container">
-            <div class="loading-bar">
-                <div class="loading-progress" id="loadingProgress"></div>
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="在宝库中搜寻游戏...">
             </div>
-            <div class="countdown" id="countdown">5秒后自动跳转</div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部游戏</button>
+                <button class="filter-btn" data-filter="action">动作</button>
+                <button class="filter-btn" data-filter="adventure">冒险</button>
+                <button class="filter-btn" data-filter="strategy">策略</button>
+                <button class="filter-btn" data-filter="puzzle">解谜</button>
+            </div>
         </div>
-        
-        <div class="button-container">
-            <a href="HML9/index.html" class="redirect-link" id="manualLink">直接冲!</a>
-            <a href="双生魔丸.html" class="small-button">双生魔丸</a>
-        </div>
-        
-        <div class="footer">
-            <p>如果页面没有自动跳转，请点击上方链接</p>
+
+        <div class="games-grid" id="gamesContainer">
+            <!-- 游戏卡片将通过JavaScript动态生成 -->
         </div>
     </div>
 
+    <footer>
+        <p>邪恶大马斯特的百宝库 &copy; 2023 - 踏入此地者，永无回头之路</p>
+    </footer>
+
     <script>
-        // 创建浮动元素
-        const floatingElements = document.getElementById('floatingElements');
-        const symbols = ['♠', '♣', '♥', '♦', '★', '☠', '⚡', '♞'];
-        
-        for (let i = 0; i < 15; i++) {
-            const element = document.createElement('div');
-            element.className = 'floating-element';
-            element.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            element.style.left = Math.random() * 100 + 'vw';
-            element.style.animationDuration = (15 + Math.random() * 20) + 's';
-            element.style.animationDelay = Math.random() * 5 + 's';
-            element.style.fontSize = (1 + Math.random() * 2) + 'rem';
-            floatingElements.appendChild(element);
-        }
-        
-        // 自动跳转功能
-        const countdownElement = document.getElementById('countdown');
-        const loadingProgress = document.getElementById('loadingProgress');
-        
-        // 启动进度条动画
-        setTimeout(() => {
-            loadingProgress.style.width = '100%';
-        }, 100);
-        
-        // 更新倒计时
-        let countdown = 5;
-        const countdownInterval = setInterval(() => {
-            countdown--;
-            countdownElement.textContent = `${countdown}秒后自动跳转`;
-            
-            if (countdown <= 0) {
-                clearInterval(countdownInterval);
-                window.location.href = 'HML9/index.html';
+        // 模拟从服务器获取的游戏数据
+        // 在实际应用中，这里应该通过AJAX请求从服务器获取Game目录下的游戏列表
+        const games = [
+            {
+                id: 1,
+                title: "暗影迷宫",
+                description: "在无尽的迷宫中寻找出路，避开潜伏的暗影生物。",
+                category: "adventure",
+                folder: "shadow-maze",
+                players: "单人",
+                difficulty: "中等",
+                image: "./Game/shadow-maze/preview.png"
+            },
+            {
+                id: 2,
+                title: "血族战争",
+                description: "指挥你的血族大军，征服黑夜中的领地。",
+                category: "strategy",
+                folder: "vampire-war",
+                players: "多人",
+                difficulty: "困难",
+                image: "./Game/vampire-war/preview.png"
+            },
+            {
+                id: 3,
+                title: "恶魔猎手",
+                description: "扮演猎魔人，清除世界中的邪恶存在。",
+                category: "action",
+                folder: "demon-hunter",
+                players: "单人",
+                difficulty: "中等",
+                image: "./Game/demon-hunter/preview.png"
+            },
+            {
+                id: 4,
+                title: "诅咒之塔",
+                description: "攀登被诅咒的高塔，解开层层谜题。",
+                category: "puzzle",
+                folder: "cursed-tower",
+                players: "单人",
+                difficulty: "简单",
+                image: "./Game/cursed-tower/preview.png"
+            },
+            {
+                id: 5,
+                title: "亡灵序曲",
+                description: "在亡灵横行的世界中生存，谱写你的生存序曲。",
+                category: "action",
+                folder: "undead-overture",
+                players: "单人/多人",
+                difficulty: "困难",
+                image: "./Game/undead-overture/preview.png"
+            },
+            {
+                id: 6,
+                title: "深渊呼唤",
+                description: "潜入深海，面对来自深渊的恐怖存在。",
+                category: "adventure",
+                folder: "abyss-call",
+                players: "单人",
+                difficulty: "中等",
+                image: "./Game/abyss-call/preview.png"
             }
-        }, 1000);
+        ];
+
+        // 渲染游戏卡片
+        function renderGames(gamesToRender) {
+            const container = document.getElementById('gamesContainer');
+            container.innerHTML = '';
+            
+            if (gamesToRender.length === 0) {
+                container.innerHTML = '<div class="no-results">未找到匹配的游戏...大马斯特的宝库中似乎没有你要找的东西</div>';
+                return;
+            }
+            
+            gamesToRender.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.setAttribute('data-category', game.category);
+                
+                gameCard.innerHTML = `
+                    <div class="game-image">
+                        <img src="${game.image}" alt="${game.title}" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22180%22 viewBox=%220 0 300 180%22%3E%3Crect fill=%22%234a0000%22 width=%22300%22 height=%22180%22/%3E%3Ctext fill=%22%23ffffff%22 font-family=%22Arial%22 font-size=%2218%22 text-anchor=%22middle%22 x=%22150%22 y=%2295%22%3E${game.title}%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="game-info">
+                        <h3 class="game-title">${game.title}</h3>
+                        <p class="game-description">${game.description}</p>
+                        <div class="game-meta">
+                            <span>玩家: ${game.players}</span>
+                            <span>难度: ${game.difficulty}</span>
+                        </div>
+                        <a href="./Game/${game.folder}/index.html" class="play-btn">进入游戏</a>
+                    </div>
+                `;
+                
+                container.appendChild(gameCard);
+            });
+        }
+
+        // 初始渲染
+        renderGames(games);
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredGames = games.filter(game => 
+                game.title.toLowerCase().includes(searchTerm) || 
+                game.description.toLowerCase().includes(searchTerm)
+            );
+            renderGames(filteredGames);
+        });
+
+        // 分类筛选功能
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // 更新活动按钮
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                if (filter === 'all') {
+                    renderGames(games);
+                } else {
+                    const filteredGames = games.filter(game => game.category === filter);
+                    renderGames(filteredGames);
+                }
+            });
+        });
     </script>
 </body>
 </html>
