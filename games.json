@@ -1,0 +1,20 @@
+﻿[
+    {
+        "title":  "吃豆包人",
+        "folder":  "吃豆包人",
+        "id":  1,
+        "link":  "./Game/吃豆包人/index.html"
+    },
+    {
+        "title":  "成都超人",
+        "folder":  "成都超人",
+        "id":  2,
+        "link":  "./Game/成都超人/index.html"
+    },
+    {
+        "title":  "黑神话像素版",
+        "folder":  "黑神话像素版",
+        "id":  3,
+        "link":  "./Game/黑神话像素版/index.html"
+    }
+]

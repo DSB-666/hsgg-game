@@ -1,0 +1,329 @@
+:root {
+    --primary-color: #8b0000;
+    --secondary-color: #4a0000;
+    --accent-color: #ff4500;
+    --background-dark: #0f0f0f;
+    --background-light: #1f1f1f;
+    --text-color: #eaeaea;
+    --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    /* 动态渐变背景 */
+    background-image: radial-gradient(circle at 10% 20%, rgba(139, 0, 0, 0.06) 0%, transparent 20%),
+                      radial-gradient(circle at 90% 80%, rgba(255, 69, 0, 0.06) 0%, transparent 20%);
+    animation: bgShift 18s linear infinite;
+    background-size: 140% 140%, 140% 140%;
+}
+
+@keyframes bgShift {
+    0% { background-position: 0% 50%, 100% 50%; }
+    50% { background-position: 100% 50%, 0% 50%; }
+    100% { background-position: 0% 50%, 100% 50%; }
+}
+
+header {
+    background: linear-gradient(90deg, rgba(74,0,0,0.25), rgba(139,0,0,0.5));
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--accent-color);
+    z-index: 15; /* 抬高 header，确保标题与控件总在路灯之上 */
+}
+
+.header-particles { position: absolute; inset: 0; pointer-events: none; opacity: 0.12; }
+
+h1 { font-size: 3rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); margin-bottom: 0.5rem; letter-spacing: 2px; }
+
+.subtitle { font-style: italic; opacity: 0.9; font-size: 1.05rem; }
+
+/* 双生魔丸风格的文字分解与动效 */
+.title { font-size: 3rem; display:inline-block; position:relative; }
+.title .char-container { display:inline-block; position:relative; transform-style:preserve-3d; }
+.title .char { display:inline-block; position:relative; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.subtitle .char { display:inline-block; position:relative; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+
+@keyframes breath {
+    0%,100%{ transform:scale(1); filter:brightness(1) blur(0px); }
+    25%{ transform:scale(1.08); filter:brightness(1.2) blur(0.5px); }
+    50%{ transform:scale(1.12); filter:brightness(1.3) blur(0px); }
+    75%{ transform:scale(1.08); filter:brightness(1.2) blur(0.5px); }
+}
+
+@keyframes flow { 0%{ background-position:0% 50%; } 50%{ background-position:100% 50%; } 100%{ background-position:0% 50%; } }
+
+@keyframes shake {
+    0%,50%,100%{ transform:translate(0,0) rotate(0deg); }
+    52%{ transform:translate(4px,3px) rotate(1.5deg); }
+    54%{ transform:translate(-3px,4px) rotate(-1.5deg); }
+}
+
+@keyframes rotate3d {
+    0%{ transform:rotateX(0) rotateY(0) rotateZ(0); }
+    50%{ transform:rotateX(6deg) rotateY(8deg) rotateZ(1deg); }
+    100%{ transform:rotateX(0) rotateY(0) rotateZ(0); }
+}
+
+/* 默认渐变文字样式（可被 JS 随机化） */
+.title .char { background: linear-gradient(90deg, #ff0080, #8000ff, #00ffff, #ff0080); background-size:300% 100%; text-shadow:0 0 12px rgba(255,0,128,0.6); }
+.subtitle .char { background: linear-gradient(90deg, #ff6600, #ffcc00, #ff6600); background-size:300% 100%; text-shadow:0 0 10px rgba(255,102,0,0.6); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; position: relative; z-index: 10; }
+
+.controls { display: flex; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; background-color: rgba(30,30,30,0.55); padding: 1.5rem; border-radius: 8px; box-shadow: var(--card-shadow); }
+
+.search-box { flex-grow: 1; max-width: 420px; }
+
+.search-box input { width: 100%; padding: 0.8rem; border: 1px solid rgba(255,255,255,0.03); background-color: var(--background-light); color: var(--text-color); border-radius: 6px; font-size: 1rem; }
+
+.filter-buttons { display:flex; gap:0.5rem; flex-wrap:wrap; }
+
+.filter-btn { padding:0.5rem 1rem; background-color: transparent; border:1px solid rgba(255,255,255,0.04); color:var(--text-color); border-radius:6px; cursor:pointer; transition:all .25s ease; }
+
+.filter-btn.active, .filter-btn:hover { background: linear-gradient(90deg, rgba(139,0,0,0.2), rgba(255,69,0,0.08)); border-color: var(--accent-color); }
+
+.games-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:1.5rem; }
+
+.game-card { background-color: var(--background-light); border-radius: 10px; overflow: hidden; box-shadow: var(--card-shadow); transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s; display:flex; flex-direction:column; position:relative; border:1px solid rgba(255,255,255,0.02); }
+
+.game-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 18px 40px rgba(0,0,0,0.7); }
+
+.game-image { height:180px; background:linear-gradient(180deg, rgba(139,0,0,0.12), rgba(0,0,0,0.2)); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+
+.game-image::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.5)); }
+
+.game-image img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+
+.game-card:hover .game-image img { transform: scale(1.06); }
+
+.game-info { padding:1.25rem; display:flex; flex-direction:column; gap:0.65rem; flex-grow:1; }
+
+.game-title { font-size:1.2rem; color:var(--accent-color); text-shadow:1px 1px 2px rgba(0,0,0,0.6); }
+
+.game-description { color: rgba(230,230,230,0.88); font-size:0.95rem; opacity:0.95; }
+
+.game-meta { display:flex; justify-content:space-between; font-size:0.88rem; color:rgba(230,230,230,0.7); }
+
+.play-btn { display:inline-block; text-align:center; padding:0.7rem; background: linear-gradient(90deg,var(--primary-color),var(--accent-color)); color:#fff; text-decoration:none; border-radius:6px; font-weight:700; letter-spacing:1px; margin-top:auto; }
+
+.play-btn:active { transform:translateY(1px); }
+
+footer { text-align:center; padding:2rem; margin-top:2rem; border-top:1px solid rgba(255,255,255,0.03); opacity:0.85; background-color: transparent; }
+
+.no-results { grid-column:1/-1; text-align:center; padding:2rem; font-style:italic; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border-radius:8px; }
+
+/* 卡片光晕与动态效果 */
+.game-card::after { content:''; position:absolute; left:50%; top:-30%; width:180%; height:60%; transform:translateX(-50%) rotate(24deg); background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.06), rgba(255,255,255,0.02)); pointer-events:none; opacity:0; transition:opacity .4s ease; }
+.game-card:hover::after { opacity:1; }
+
+@media (max-width:768px) { .controls{ flex-direction:column; } .search-box{ max-width:100%; } .games-grid{ grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); } h1{ font-size:2.4rem; } }
+@media (max-width:480px) { .games-grid{ grid-template-columns:1fr; } h1{ font-size:1.8rem; } .container{ padding:1rem; } }
+/* 新增浮动元素、路灯样式 */
+.scene-overlay { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 5; }
+.fog { position:absolute; inset:0; background: radial-gradient(circle at 30% 30%, rgba(0,0,0,0.22), transparent 20%), radial-gradient(circle at 70% 70%, rgba(20,0,0,0.12), transparent 25%); mix-blend-mode: overlay; opacity:0.6; animation: fogShift 20s linear infinite; }
+@keyframes fogShift { 0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)} }
+.float-orb { position:absolute; width: 120px; height:120px; border-radius:50%; background: radial-gradient(circle at 30% 30%, rgba(255,140,0,0.22), rgba(139,0,0,0.06)); box-shadow:0 0 30px rgba(255,140,0,0.06), inset 0 0 20px rgba(255,255,255,0.02); animation: floaty 6s ease-in-out infinite; mix-blend-mode: screen; }
+.float-orb.small{ width:60px;height:60px; }
+.float-orb.one { left: 10%; top: 20%; animation-delay: 0s; }
+.float-orb.two { left: 30%; top: 60%; animation-delay: 1.2s; }
+.float-orb.three { left: 65%; top: 35%; animation-delay: 0.6s; }
+.float-orb.four { left: 80%; top: 70%; animation-delay: 2s; }
+@keyframes floaty { 0%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.03)}100%{transform:translateY(0) scale(1)} }
+
+/* 路灯（右上）——保持灯头朝左，灯柱从上方向下延伸 */
+.lamppost { position: fixed; right: 18px; top: 18px; width: 120px; height: 320px; z-index: 12; pointer-events: auto; }
+.lamppost .post { position:absolute; right:48px; top:0; width:6px; height:220px; background: linear-gradient(#111,#2b0b0b); border-radius:4px; box-shadow:0 6px 20px rgba(0,0,0,0.6); }
+.lamppost .arm { position:absolute; right:54px; top:40px; width:60px; height:6px; background: linear-gradient(#2b0b0b,#150606); transform-origin:right center; transform:rotate(-12deg); border-radius:3px; }
+.lamppost .lamp { position:absolute; right:100px; top:6px; width:58px; height:58px; background: radial-gradient(circle at 30% 30%, #fff6b8, #ffcc66 40%, rgba(255,140,0,0.12) 60%, rgba(0,0,0,0.9) 100%); border-radius:6px; box-shadow:0 10px 40px rgba(255,180,60,0.12); animation: lampFlicker 3s infinite; }
+@keyframes lampFlicker { 0%{filter:brightness(1)}50%{filter:brightness(0.9)}100%{filter:brightness(1)} }
+.lamppost .lightGlow { position:absolute; right:70px; top:40px; width:260px; height:180px; background: radial-gradient(ellipse at 90% 10%, rgba(255,190,90,0.12), rgba(0,0,0,0)); transform: rotate(14deg); filter: blur(16px); pointer-events:none; }
+.lamppost .chain { position:absolute; right:96px; top:46px; width:2px; height:38px; background:linear-gradient(#555,#222); transform:rotate(10deg); }
+.lamppost .sign { position:absolute; right:80px; top:72px; width:160px; padding:8px 12px; background: linear-gradient(180deg,#1a0a0a,#2b0b0b); color:#ffe6b3; font-weight:700; font-family: 'Segoe UI',Arial; border-radius:6px; box-shadow:0 6px 18px rgba(0,0,0,0.6); transform:rotate(6deg); display:flex; align-items:center; justify-content:center; letter-spacing:2px; }
+.lamppost .sign::before{ content:''; position:absolute; left:8px; right:8px; top:0; bottom:0; border-radius:6px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+
+/* 双生魔丸 - 路灯样式（左右） */
+.street-light-left {
+    position: fixed; /* 固定在视口，作为装饰 */
+    left: 4%;
+    bottom: 8%; /* 靠近页面底部，避免与 header 和顶部元素重叠 */
+    transform: translateY(0);
+    width: 120px;
+    height: 400px;
+    z-index: 12; /* 高于游戏列表（.container:10），但低于 header（:15） */
+    pointer-events: none; /* 装饰性元素不阻塞交互 */
+}
+
+.street-light-right {
+    position: fixed;
+    right: 4%;
+    bottom: 8%;
+    transform: scaleX(-1);
+    width: 120px;
+    height: 400px;
+    z-index: 12; /* 高于游戏列表 */
+    pointer-events: none;
+}
+
+.light-base {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    height: 20px;
+    background: linear-gradient(to right, #333, #666, #333);
+    border-radius: 5px;
+    left: 40px;
+}
+
+.light-pole {
+    position: absolute;
+    bottom: 20px;
+    left: 55px;
+    width: 10px;
+    height: 300px;
+    background: linear-gradient(to right, #666, #999, #666);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.light-arm {
+    position: absolute;
+    top: 60px;
+    left: 55px;
+    width: 60px;
+    height: 10px;
+    background: linear-gradient(to bottom, #555, #888);
+    border-radius: 5px;
+    transform-origin: left center;
+    transform: rotate(-10deg);
+}
+
+.light-head {
+    position: absolute;
+    top: 50px;
+    left: 110px;
+    width: 30px;
+    height: 40px;
+    background: linear-gradient(to bottom, #555, #888);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 5px;
+}
+
+.light-glow {
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #ffffaa, #ffcc00, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: light-flicker 3s infinite alternate;
+    filter: blur(5px);
+}
+
+.rope {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 60px;
+    background: linear-gradient(to bottom, #8B4513, #A0522D);
+    border-radius: 2px;
+}
+
+.hanged-figure {
+    position: absolute;
+    bottom: -140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 80px;
+    background: linear-gradient(135deg, #8B0000, #B22222);
+    border-radius: 30px 30px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    animation: hanging 5s ease-in-out infinite;
+    z-index: 10;
+}
+
+.hanged-figure::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 10px;
+    background: #8B4513;
+    border-radius: 10px 10px 0 0;
+}
+
+.hanged-figure::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: #8B0000;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+@keyframes light-flicker {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes hanging {
+    0%, 100% {
+        transform: translateX(-50%) rotate(-5deg);
+    }
+    50% {
+        transform: translateX(-50%) rotate(5deg);
+    }
+}
+
+/* 装饰性浮动圆圈（来自 双生魔丸.html） */
+.decoration { position: absolute; width: 100%; height: 100%; pointer-events: none; z-index: -1; }
+.circle { position: absolute; border-radius: 50%; opacity: 0.1; filter: blur(40px); animation: float-circle 15s infinite linear; }
+.circle:nth-child(1) { width: 300px; height: 300px; background: #ff0080; top: 10%; left: 10%; animation-delay: 0s; }
+.circle:nth-child(2) { width: 400px; height: 400px; background: #8000ff; bottom: 10%; right: 10%; animation-delay: -5s; }
+.circle:nth-child(3) { width: 250px; height: 250px; background: #00ffff; top: 50%; left: 80%; animation-delay: -10s; }
+.circle:nth-child(4) { width: 350px; height: 350px; background: #ff4444; top: 70%; left: 20%; animation-delay: -7s; }
+
+@keyframes float-circle {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(20px, 20px) rotate(90deg); }
+    50% { transform: translate(0, 40px) rotate(180deg); }
+    75% { transform: translate(-20px, 20px) rotate(270deg); }
+}
+
+@media (max-width: 768px) {
+    .street-light-left, .street-light-right { width: 80px; height: 300px; }
+    .light-pole { height: 220px; }
+    .hanged-figure { width: 50px; height: 70px; font-size: 0.6rem; bottom: -120px; }
+}

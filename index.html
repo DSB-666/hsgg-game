@@ -4,280 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>邪恶大马斯特的百宝库</title>
-    <style>
-        :root {
-            --primary-color: #8b0000;
-            --secondary-color: #4a0000;
-            --accent-color: #ff4500;
-            --background-dark: #1a1a1a;
-            --background-light: #2d2d2d;
-            --text-color: #f0f0f0;
-            --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
+    <link rel="stylesheet" href="CSS/styles.css">
+    </head>
+    <body>
+    <!-- 场景叠层：雾与浮动光球 -->
+    <div class="scene-overlay" aria-hidden="true">
+        <div class="fog"></div>
+        <div class="float-orb one"></div>
+        <div class="float-orb two small"></div>
+        <div class="float-orb three"></div>
+        <div class="float-orb four small"></div>
+    </div>
+    <!-- 左右路灯（来自 双生魔丸.html） -->
+    <div class="street-light-left" aria-hidden="true">
+        <div class="light-base"></div>
+        <div class="light-pole"></div>
+        <div class="light-arm"></div>
+        <div class="light-head">
+            <div class="light-glow"></div>
+            <div class="rope"></div>
+            <div class="hanged-figure">邪恶大马斯特刘</div>
+        </div>
+    </div>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-color);
-            line-height: 1.6;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(255, 69, 0, 0.1) 0%, transparent 20%);
-        }
-
-        header {
-            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-            position: relative;
-            overflow: hidden;
-            border-bottom: 3px solid var(--accent-color);
-        }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(0,0,0,0.2)"/></svg>');
-            background-size: cover;
-        }
-
-        h1 {
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            margin-bottom: 0.5rem;
-            position: relative;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            font-style: italic;
-            opacity: 0.8;
-            position: relative;
-            font-size: 1.2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-            background-color: rgba(45, 45, 45, 0.7);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .search-box {
-            flex-grow: 1;
-            max-width: 400px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--primary-color);
-            background-color: var(--background-light);
-            color: var(--text-color);
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1rem;
-            background-color: var(--background-light);
-            border: 1px solid var(--primary-color);
-            color: var(--text-color);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background-color: var(--primary-color);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .game-card {
-            background-color: var(--background-light);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(139, 0, 0, 0.3);
-        }
-
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
-            border-color: var(--accent-color);
-        }
-
-        .game-image {
-            height: 180px;
-            background-color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .game-image::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
-        }
-
-        .game-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .game-card:hover .game-image img {
-            transform: scale(1.05);
-        }
-
-        .game-info {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .game-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-color);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .game-description {
-            margin-bottom: 1rem;
-            flex-grow: 1;
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .game-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 1rem;
-        }
-
-        .play-btn {
-            display: block;
-            text-align: center;
-            padding: 0.8rem;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .play-btn:hover {
-            background-color: var(--accent-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--primary-color);
-            opacity: 0.7;
-            background-color: var(--background-light);
-        }
-
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 2rem;
-            font-style: italic;
-            opacity: 0.7;
-            background-color: var(--background-light);
-            border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .controls {
-                flex-direction: column;
-            }
-            
-            .search-box {
-                max-width: 100%;
-            }
-            
-            .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                padding: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
+    <div class="street-light-right" aria-hidden="true">
+        <div class="light-base"></div>
+        <div class="light-pole"></div>
+        <div class="light-arm"></div>
+        <div class="light-head">
+            <div class="light-glow"></div>
+            <div class="rope"></div>
+            <div class="hanged-figure">邪恶大马斯特刘</div>
+        </div>
+    </div>
     <header>
-        <h1>邪恶大马斯特的百宝库</h1>
-        <p class="subtitle">踏入此地者，将直面无尽游戏的诱惑</p>
+        <h1 id="siteTitle" class="title">邪恶大马斯特的百宝库</h1>
+        <p id="siteSubtitle" class="subtitle">踏入此地者，将直面无尽游戏的诱惑</p>
+        <!-- 顶部微粒子（SVG，纯装饰） -->
+        <svg class="header-particles" width="100%" height="100%" viewBox="0 0 800 120" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+                <linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ff6a00" stop-opacity="0.12"/><stop offset="1" stop-color="#8b0000" stop-opacity="0.06"/></linearGradient>
+            </defs>
+            <path d="M0,80 C150,10 350,140 800,40 L800,120 L0,120 Z" fill="url(#g1)"></path>
+        </svg>
     </header>
 
     <div class="container">
@@ -285,7 +54,7 @@
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="在宝库中搜寻游戏...">
             </div>
-            <div class="filter-buttons">
+            <div class="filter-buttons" id="filterButtons">
                 <button class="filter-btn active" data-filter="all">全部游戏</button>
                 <button class="filter-btn" data-filter="action">动作</button>
                 <button class="filter-btn" data-filter="adventure">冒险</button>
@@ -304,137 +73,163 @@
     </footer>
 
     <script>
-        // 模拟从服务器获取的游戏数据
-        // 在实际应用中，这里应该通过AJAX请求从服务器获取Game目录下的游戏列表
-        const games = [
-            {
-                id: 1,
-                title: "暗影迷宫",
-                description: "在无尽的迷宫中寻找出路，避开潜伏的暗影生物。",
-                category: "adventure",
-                folder: "shadow-maze",
-                players: "单人",
-                difficulty: "中等",
-                image: "./Game/shadow-maze/preview.png"
-            },
-            {
-                id: 2,
-                title: "血族战争",
-                description: "指挥你的血族大军，征服黑夜中的领地。",
-                category: "strategy",
-                folder: "vampire-war",
-                players: "多人",
-                difficulty: "困难",
-                image: "./Game/vampire-war/preview.png"
-            },
-            {
-                id: 3,
-                title: "恶魔猎手",
-                description: "扮演猎魔人，清除世界中的邪恶存在。",
-                category: "action",
-                folder: "demon-hunter",
-                players: "单人",
-                difficulty: "中等",
-                image: "./Game/demon-hunter/preview.png"
-            },
-            {
-                id: 4,
-                title: "诅咒之塔",
-                description: "攀登被诅咒的高塔，解开层层谜题。",
-                category: "puzzle",
-                folder: "cursed-tower",
-                players: "单人",
-                difficulty: "简单",
-                image: "./Game/cursed-tower/preview.png"
-            },
-            {
-                id: 5,
-                title: "亡灵序曲",
-                description: "在亡灵横行的世界中生存，谱写你的生存序曲。",
-                category: "action",
-                folder: "undead-overture",
-                players: "单人/多人",
-                difficulty: "困难",
-                image: "./Game/undead-overture/preview.png"
-            },
-            {
-                id: 6,
-                title: "深渊呼唤",
-                description: "潜入深海，面对来自深渊的恐怖存在。",
-                category: "adventure",
-                folder: "abyss-call",
-                players: "单人",
-                difficulty: "中等",
-                image: "./Game/abyss-call/preview.png"
-            }
+        // 优先从仓库根部的 games.json 加载（可由脚本生成）。若加载失败则回退到内置示例数据。
+        const fallbackGames = [
+            //{ id:1, title:'成都超人', description:'成都超人', category:'action', folder:'成都超人', players:'单人', difficulty:'中等', link:'./Game/成都超人/index.html', image:'./Game/成都超人/TemplateData/style.css' },
+            //{ id:2, title:'吃豆包人', description:'吃豆包人', category:'adventure', folder:'吃豆包人', players:'单人', difficulty:'中等', link:'./Game/吃豆包人/index.html', image:'./Game/吃豆包人/Build/吃豆包人.loader.js' },
+            { id:1, title:'成都超人', description:'成都超人', category:'action', folder:'成都超人', players:'单人', difficulty:'中等', link:'./Game/成都超人/index.html', image:'./Game/成都超人/preview.png' },
+            { id:2, title:'吃豆包人', description:'吃豆包人', category:'adventure', folder:'吃豆包人', players:'单人', difficulty:'中等', link:'./Game/吃豆包人/index.html', image:'./Game/吃豆包人/preview.png' },
+            { id:3, title:'黑神话像素版', description:'像素化版本演示', category:'adventure', folder:'黑神话像素版', players:'单人', difficulty:'中等', link:'./Game/黑神话像素版/index.html', image:'./Game/黑神话像素版/preview.png' },
+            { id:4, title:'哈基米南北绿豆', description:'哈基米南北绿豆', category:'adventure', folder:'哈基米南北绿豆', players:'单人', difficulty:'中等', link:'./Game/哈基米南北绿豆/index.html', image:'./Game/哈基米南北绿豆/preview.png' }
         ];
+
+        // 从 games.json 拉取数据（如果存在）
+        async function loadGames() {
+            try {
+                        const resp = await fetch('./games.json', { cache: 'no-store' });
+                        if (!resp.ok) throw new Error('no games.json');
+                        const data = await resp.json();
+                        if (!Array.isArray(data) || data.length === 0) throw new Error('empty');
+                        return data.map((g, idx) => ({ id: g.id || idx+1, title: g.title || g.name || g.folder, description: g.description || '', category: g.category || 'other', folder: g.folder || g.name || '', link: g.link || (`./Game/${g.folder || g.name}/index.html`), image: g.image || g.preview || g.thumb || '' }));
+            } catch (e) {
+                        console.warn('加载 games.json 失败：', e);
+                        // 尝试抓取 Game 目录的列表（如果静态服务器允许目录索引）
+                        try {
+                            const dirResp = await fetch('./Game/');
+                            if (dirResp.ok) {
+                                const text = await dirResp.text();
+                                // 提取 href="NAME/" 或 href='NAME/' 的目录名
+                                const re = /href\s*=\s*["']([^"']+)\/["']/g;
+                                const folders = new Set();
+                                let m;
+                                while ((m = re.exec(text)) !== null) {
+                                    const name = m[1];
+                                    if (name === '../') continue;
+                                    // 只添加顶层文件夹名（不包含 path）
+                                    if (!name.includes('/')) folders.add(decodeURIComponent(name));
+                                }
+                                const arr = Array.from(folders).map((name, idx) => ({
+                                    id: idx+1,
+                                    title: name,
+                                    description: '',
+                                    category: 'other',
+                                    folder: name,
+                                    link: `./Game/${encodeURIComponent(name)}/index.html`,
+                                    image: `./Game/${encodeURIComponent(name)}/preview.png`
+                                }));
+                                if (arr.length) return arr;
+                            }
+                        } catch (err) {
+                            console.warn('尝试读取 Game 目录列表失败：', err);
+                        }
+                        // 最后回退到内置数据
+                        console.warn('使用回退数据');
+                        return fallbackGames;
+            }
+        }
+
+                // 将标题/副标题拆分为单字符并添加动效（参考 双生魔丸）
+                function splitText(element) {
+                    if (!element) return;
+                    const text = element.textContent.trim();
+                    element.innerHTML = '';
+                    for (let i = 0; i < text.length; i++) {
+                        const container = document.createElement('span');
+                        container.className = 'char-container';
+                        container.style.setProperty('--rotate-duration', (Math.random()*6+6).toFixed(1)+'s');
+
+                        const char = document.createElement('span');
+                        char.className = 'char';
+                        char.textContent = text[i];
+                        char.style.setProperty('--i', i);
+                        char.style.setProperty('--duration', (Math.random()*2+2).toFixed(1)+'s');
+                        char.style.setProperty('--shake-duration', (Math.random()*1+1).toFixed(1)+'s');
+
+                        // small staggered animations
+                        char.style.animation = `breath ${ (Math.random()*2+2).toFixed(1) }s ease-in-out infinite, flow ${ (Math.random()*4+4).toFixed(1) }s linear infinite, shake ${ (Math.random()*1+1).toFixed(1) }s ease-in-out infinite`;
+
+                        container.appendChild(char);
+                        element.appendChild(container);
+                    }
+                }
 
         // 渲染游戏卡片
         function renderGames(gamesToRender) {
             const container = document.getElementById('gamesContainer');
             container.innerHTML = '';
-            
-            if (gamesToRender.length === 0) {
+            if (!gamesToRender || gamesToRender.length === 0) {
                 container.innerHTML = '<div class="no-results">未找到匹配的游戏...大马斯特的宝库中似乎没有你要找的东西</div>';
                 return;
             }
-            
+
             gamesToRender.forEach(game => {
                 const gameCard = document.createElement('div');
                 gameCard.className = 'game-card';
-                gameCard.setAttribute('data-category', game.category);
-                
+                gameCard.setAttribute('data-category', game.category || 'other');
+
+                // 选择合适的图片或占位
+                // 优先尝试：Game/<folder>/preview.png -> game.image -> 占位SVG
+                let imgTag = '';
+                const folderName = game.folder || '';
+                const previewPath = folderName ? (`./Game/${encodeURIComponent(folderName)}/preview.png`) : null;
+                const label = escapeHtml(game.title || game.folder || '游戏');
+                const placeholderSvg = encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360'><rect fill='#4a0000' width='600' height='360'/><text x='50%' y='50%' font-family='Arial' font-size='28' fill='#ffffff' dominant-baseline='middle' text-anchor='middle'>${label}</text></svg>`);
+                const placeholderData = `data:image/svg+xml;utf8,${placeholderSvg}`;
+
+                if (previewPath) {
+                    // 先尝试目录下的 preview.png，失败后回退到 game.image 或占位
+                    const imageSrc = previewPath;
+                    // 使用 onerror 切换到 game.image（若存在）或占位图
+                    const fallback = (game.image && typeof game.image === 'string') ? escapeAttr(game.image) : placeholderData;
+                    imgTag = `<img src="${imageSrc}" alt="${label}" onerror="this.onerror=null;this.src='${fallback}'">`;
+                } else if (game.image && typeof game.image === 'string') {
+                    imgTag = `<img src="${escapeAttr(game.image)}" alt="${label}" onerror="this.onerror=null;this.src='${placeholderData}'">`;
+                } else {
+                    imgTag = `<img src='${placeholderData}' alt='${label}'>`;
+                }
+
                 gameCard.innerHTML = `
-                    <div class="game-image">
-                        <img src="${game.image}" alt="${game.title}" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22180%22 viewBox=%220 0 300 180%22%3E%3Crect fill=%22%234a0000%22 width=%22300%22 height=%22180%22/%3E%3Ctext fill=%22%23ffffff%22 font-family=%22Arial%22 font-size=%2218%22 text-anchor=%22middle%22 x=%22150%22 y=%2295%22%3E${game.title}%3C/text%3E%3C/svg%3E'">
-                    </div>
+                    <div class="game-image">${imgTag}</div>
                     <div class="game-info">
-                        <h3 class="game-title">${game.title}</h3>
-                        <p class="game-description">${game.description}</p>
-                        <div class="game-meta">
-                            <span>玩家: ${game.players}</span>
-                            <span>难度: ${game.difficulty}</span>
-                        </div>
-                        <a href="./Game/${game.folder}/index.html" class="play-btn">进入游戏</a>
+                        <h3 class="game-title">${escapeHtml(game.title)}</h3>
+                        <p class="game-description">${escapeHtml(game.description || '')}</p>
+                        <a href="${escapeAttr(game.link)}" class="play-btn" target="_self">进入游戏</a>
                     </div>
                 `;
-                
+
                 container.appendChild(gameCard);
             });
         }
 
-        // 初始渲染
-        renderGames(games);
+        function escapeHtml(s){ return String(s || '').replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+        function escapeAttr(s){ return String(s || '').replace(/"/g,'&quot;'); }
 
-        // 搜索功能
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredGames = games.filter(game => 
-                game.title.toLowerCase().includes(searchTerm) || 
-                game.description.toLowerCase().includes(searchTerm)
-            );
-            renderGames(filteredGames);
-        });
-
-        // 分类筛选功能
-        document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                // 更新活动按钮
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                const filter = this.getAttribute('data-filter');
-                
-                if (filter === 'all') {
-                    renderGames(games);
-                } else {
-                    const filteredGames = games.filter(game => game.category === filter);
-                    renderGames(filteredGames);
-                }
+        // 搜索与筛选
+        function attachControls(games) {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', e => {
+                const term = e.target.value.toLowerCase().trim();
+                const filtered = games.filter(g => (g.title||'').toLowerCase().includes(term) || (g.description||'').toLowerCase().includes(term));
+                renderGames(filtered);
             });
-        });
+
+            document.getElementById('filterButtons').addEventListener('click', e => {
+                const btn = e.target.closest('.filter-btn');
+                if (!btn) return;
+                document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                if (filter === 'all') renderGames(games);
+                else renderGames(games.filter(g => (g.category||'').toLowerCase() === filter.toLowerCase()));
+            });
+        }
+
+        // 启动
+        (async function(){
+            const games = await loadGames();
+            renderGames(games);
+            attachControls(games);
+        })();
     </script>
 </body>
 </html>
